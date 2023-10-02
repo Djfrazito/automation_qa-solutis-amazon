@@ -24,6 +24,11 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+/**
+ * Login with email and password.
+ * {String} email
+ * {String} password
+ */
 Cypress.Commands.add('login', (email, password) => {
   cy.session([email, password], () => {
     cy.visit("/")
@@ -42,3 +47,17 @@ Cypress.Commands.add('login', (email, password) => {
     cy.get('#ap_password').should('be.visible').and('have.value', '').type(`${password}{enter}`, {log: false});
   }, {cacheAcrossSpecs: true})
 })
+
+ /**
+ * Select an option containing part of string in its text body
+ * {String} elementSelector
+ * {String} optionTextPart
+ */
+Cypress.Commands.add('selectOptionContaining', (elementSelector, optionTextPart) => {
+  cy.get(elementSelector)
+  .find('option')
+  .contains(optionTextPart)
+  .then($option => {
+      cy.get(elementSelector).select($option.text());
+  });
+});
