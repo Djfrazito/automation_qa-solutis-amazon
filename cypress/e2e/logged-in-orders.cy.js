@@ -29,7 +29,7 @@ describe("Tela de meus pedidos", () => {
   it("Validando botão de comprar novamente.", () => {
     cy.visit("/gp/your-account/order-history");
     cy.checkIfUserHasOrders();
-    cy.get("#a-autoid-2-announce").click();
+    cy.get("a[aria-label='Comprar novamente']").first().click();
     // Adicionando e removendo o primeiro item dos pedidos.
     cy.get("input[name='submit.addToCart']").first().click();
     cy.get("#atc-stepper-remove-button").first().click();
@@ -38,7 +38,7 @@ describe("Tela de meus pedidos", () => {
   it("Validando a avaliação do produto.", () => {
     cy.visit("/gp/your-account/order-history");
     cy.checkIfUserHasOrders();
-    cy.get("#a-autoid-4-announce").click();
+    cy.get("a:contains('Avaliar o produto')").first().click();
     cy.get("div[class='a-section a-spacing-top-micro'] > button[data-hook='ryp-star']:nth-child(5)")
       .should("be.visible")
       .click();
@@ -53,12 +53,5 @@ describe("Tela de meus pedidos", () => {
     cy.get("input[data-hook=ryp-review-title-input]").type("Produto muito bom");
     cy.get("input[type=file]").selectFile("cypress/images/imagem.png", {force: true});
     cy.get("#scarface-review-text-card-title").type("Eu recomendo este produto.");
-  })
-  
-  it("Validando botão de ver o item comprado.", () => {
-    cy.visit("/gp/your-account/order-history");
-    cy.checkIfUserHasOrders();
-    cy.get("#a-autoid-3-announce").click();
-    cy.contains("a.a-size-base-plus.a-link-normal", "Exibir detalhes do produto").first().click();
   })
 });

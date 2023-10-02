@@ -57,6 +57,11 @@ Cypress.Commands.add("checkIfUserHasOrders", () => {
       const orderCount = parseInt(text);
       if (orderCount === 0) {
         cy.log('O usuário não possui pedidos.');
+        cy.get("#a-autoid-1-announce")
+          .click()
+          .get('a.a-dropdown-link')
+          .contains(new Date().getFullYear().toString())
+          .click();
       } else {
         cy.log(`O usuário possui ${orderCount} pedidos.`);
       }
