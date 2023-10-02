@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 /**
- * Login with email and password.
+ * Login na conta do usuário.
  * {String} email
  * {String} password
  */
@@ -48,16 +48,27 @@ Cypress.Commands.add('login', (email, password) => {
   }, {cacheAcrossSpecs: true})
 })
 
- /**
- * Select an option containing part of string in its text body
- * {String} elementSelector
- * {String} optionTextPart
- */
-Cypress.Commands.add('selectOptionContaining', (elementSelector, optionTextPart) => {
-  cy.get(elementSelector)
-  .find('option')
-  .contains(optionTextPart)
-  .then($option => {
-      cy.get(elementSelector).select($option.text());
-  });
+/*
+  * Adiciona endereço na conta do usuário.
+  * {Object} address
+*/
+Cypress.Commands.add('fillAddressDetails', (address) => {
+  cy.get("#address-ui-widgets-enterAddressFullName")
+    .clear()
+    .type(address.name);
+  cy.get("#address-ui-widgets-enterAddressPhoneNumber")
+    .clear()
+    .type(address.phone);
+  cy.get("#address-ui-widgets-enterAddressPostalCode")
+    .clear()
+    .type(address.cep)
+    .blur();
+
+  // Esperando a requisição de CEP.
+  cy.intercept(
+    "POST",
+    "https://addresssuggest-na.amazon.com/v1/lookup/places",
+  ).as("cep");
+  cy.wait("@cep");
+  cy.get("#address-ui-widgets-buildingNumber").clear().type(address.number);
 });
