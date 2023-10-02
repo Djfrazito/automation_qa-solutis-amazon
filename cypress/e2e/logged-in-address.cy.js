@@ -12,14 +12,14 @@ beforeEach(() => {
   cy.login(email, password);
 });
 
-describe("loggedIn", () => {
-  it("Validando login", () => {
+describe("Tela de meus endereços", () => {
+  it("Validando login.", () => {
     cy.visit("/");
     // Verificando se o usuário está logado.
     cy.getCookie("session-token").should("exist");
   });
 
-  it("Adiciona endereço na conta do usuário", () => {
+  it("Adicionando endereço na conta do usuário.", () => {
     cy.visit("/");
     // Acessando a página de endereços.
     cy.get('[data-nav-ref="nav_youraccount_btn"]').click();
@@ -30,7 +30,7 @@ describe("loggedIn", () => {
     cy.get("#address-ui-widgets-form-submit-button > span > input").click();
   });
 
-  it('Remove o endereço do usuário caso já exista', () => {
+  it('Removendo o endereço do usuário caso já exista.', () => {
     cy.visit('/a/addresses?ref_=ya_d_c_addr');
     // Verificando se o endereço foi adicionado.
     cy.get('.a-section.a-spacing-double-large')
@@ -48,7 +48,7 @@ describe("loggedIn", () => {
     })
   })
 
-  it.skip('Alterando o endereço do usuário', () => {
+  it.skip('Alterando o endereço do usuário.', () => {
     cy.visit('/a/addresses?ref_=ya_d_c_addr');
     // Verificando se o endereço foi adicionado.
     cy.get('.a-section.a-spacing-double-large')

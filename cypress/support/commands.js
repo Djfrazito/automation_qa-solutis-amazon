@@ -1,29 +1,3 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
 /**
  * Login na conta do usuário.
  * {String} email
@@ -72,3 +46,19 @@ Cypress.Commands.add('fillAddressDetails', (address) => {
   cy.wait("@cep");
   cy.get("#address-ui-widgets-buildingNumber").clear().type(address.number);
 });
+
+/**
+ * Verifica se o usuário possui pedidos.
+ */
+Cypress.Commands.add("checkIfUserHasOrders", () => {
+  cy.get("#a-page > section > div.your-orders-content-container__content.js-yo-main-content > div.a-row.a-spacing-base > form > label > span")
+    .invoke('text')
+    .then((text) => {
+      const orderCount = parseInt(text);
+      if (orderCount === 0) {
+        cy.log('O usuário não possui pedidos.');
+      } else {
+        cy.log(`O usuário possui ${orderCount} pedidos.`);
+      }
+    })
+})
