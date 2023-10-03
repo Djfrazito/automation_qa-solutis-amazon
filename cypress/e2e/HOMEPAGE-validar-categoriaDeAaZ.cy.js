@@ -28,8 +28,3 @@ describe('Validar categoria de "A a Z"', () => {
 
 })
 
-afterEach(() => {
-
-    cy.screenshot();
-    
-})

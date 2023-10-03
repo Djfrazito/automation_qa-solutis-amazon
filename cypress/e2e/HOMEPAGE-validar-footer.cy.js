@@ -30,9 +30,3 @@ describe('Validar roda-pé', () => {
 
   })
 })
-
-afterEach(() => {
-
-  cy.screenshot();
-  
-})

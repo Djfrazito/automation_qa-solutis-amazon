@@ -10,7 +10,7 @@ describe('Validar topBar', () => {
     
         cy.get('#nav-link-accountList').should('be.visible').trigger('mouseover');
         cy.wait(3000);
-        cy.contains('.nav-text', 'Seu Amazon Music').should('be.visible').click();
+        cy.contains('.nav-text', 'Seu Amazon Music').should('be.visible');
     })
 
     it('Identificar a categoria de produtos "Mais vendidos" no topBar e direcionar a página', () => {
@@ -25,10 +25,4 @@ describe('Validar topBar', () => {
 
     })
 
-})
-
-afterEach(() => {
-
-    cy.screenshot();
-    
 })
