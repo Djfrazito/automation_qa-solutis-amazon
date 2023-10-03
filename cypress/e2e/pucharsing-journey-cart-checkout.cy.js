@@ -59,8 +59,7 @@ describe('Página do carrinho de compras', () => {
         .should('be.visible')
         .find(`[data-asin="${productAsin.echoDot}"]`)
         .should('be.visible')
-        .find('[id^="a-autoid-"] > .a-button-inner > .a-button-input')
-        .should('be.visible')
+        .find('.a-button-input')
         .contains('Mover para o carrinho')
         .click();
     });
