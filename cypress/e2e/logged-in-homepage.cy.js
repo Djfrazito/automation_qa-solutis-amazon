@@ -7,11 +7,6 @@ beforeEach(() => {
 });
 
 describe("Tela homepage da area logada", () => {
-  it("Validando login.", () => {
-    // Verificando se o usuário está logado.
-    cy.getCookie("session-token").should("exist");
-  })
-
   it("Validando botões da homepage.", () => {
     cy.get('[data-nav-ref="nav_youraccount_btn"]').click();
 
@@ -28,10 +23,10 @@ describe("Tela homepage da area logada", () => {
   it("Validando os links de cada card da homepage.", () => {
     cy.get('[data-nav-ref="nav_youraccount_btn"]').click();
 
-    // Validando se o card existe
+    // Validando se os cards existem
     cy.get('.ya-card-cell').should('exist');
 
-    // Validando se o card possui 25 links
+    // Validando se os cards possuem 25 links
     cy.get('.ya-card-cell .a-list-item a').should('have.length', 25);
 
     // Array com o titulo dos cards

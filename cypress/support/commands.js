@@ -16,10 +16,12 @@ Cypress.Commands.add('login', (email, password) => {
     cy.get('a[data-nav-ref="nav_signin"]').click();
 
     // Login com variáveis de ambiente (cypress.env).
-    cy.get('#ap_email').should('be.visible').and('have.value', '').type(email, {log: false});
+    cy.get('#ap_email').type(email, {log: false});
     cy.get('.a-button-input').click();
-    cy.get('#ap_password').should('be.visible').and('have.value', '').type(`${password}{enter}`, {log: false});
-  }, {cacheAcrossSpecs: true})
+    cy.get('#ap_password').type(`${password}{enter}`, {log: false});
+  }, {cacheAcrossSpecs: true, validate: () => {
+    return cy.getCookie("session-token").should("exist");
+  }})
 })
 
 /*

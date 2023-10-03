@@ -1,24 +1,19 @@
+import { fakerPT_BR } from "@faker-js/faker";
 const email = Cypress.env("AMAZON_EMAIL");
 const password = Cypress.env("AMAZON_PASSWORD");
 
 let address = {
-  name: "Ricardo",
-  phone: "+5511993491245",
+  name: fakerPT_BR.person.fullName(),
+  phone: fakerPT_BR.phone.number(),
+  number:  fakerPT_BR.location.buildingNumber(),
   cep: "05750220",
-  number: "123",
-};
+}
 
 beforeEach(() => {
   cy.login(email, password);
 });
 
 describe("Tela de meus endereços", () => {
-  it("Validando login.", () => {
-    cy.visit("/");
-    // Verificando se o usuário está logado.
-    cy.getCookie("session-token").should("exist");
-  });
-
   it("Adicionando endereço na conta do usuário.", () => {
     cy.visit("/");
     // Acessando a página de endereços.
@@ -40,8 +35,8 @@ describe("Tela de meus endereços", () => {
       .and('contain', address.cep) // Rua Francisco Viana
       .then(() => {
         // Removendo o endereço.
-        cy.get('a#ya-myab-address-delete-btn-0').click();
-        cy.get('#deleteAddressModal-0-submit-btn > span > input')
+        cy.get(`a#ya-myab-address-delete-btn-1`).click();
+        cy.get('#deleteAddressModal-1-submit-btn > span > .a-button-input')
           .should('be.visible')
           .click()
           .type('{enter}');

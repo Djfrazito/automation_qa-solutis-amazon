@@ -1,5 +1,6 @@
 const email = Cypress.env("AMAZON_EMAIL");
 const password = Cypress.env("AMAZON_PASSWORD");
+
 let search;
 
 beforeEach(() => {
@@ -7,12 +8,6 @@ beforeEach(() => {
 });
 
 describe("Tela de meus pedidos", () => {
-  it("Validando login.", () => {
-    cy.visit("/");
-    // Verificando se o usuário está logado.
-    cy.getCookie("session-token").should("exist");
-  })
-
   it("Validando pesquisa de pedidos.", () => {
     search = "Pote";
     cy.visit("/gp/your-account/order-history");
