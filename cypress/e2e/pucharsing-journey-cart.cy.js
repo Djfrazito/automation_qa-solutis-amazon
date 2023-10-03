@@ -55,7 +55,7 @@ describe('Página de produto adicionar ao carrinho', () => {
 
         cy.waitForAutoComplete();
 
-        cy.get('#nav-cart-count').invoke('text').should('be.visible')
+        cy.get('#nav-cart-count').invoke('text')
         .then((text) => {
             expect(text.trim()).to.eq('0');
         });

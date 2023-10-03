@@ -19,7 +19,7 @@ Cypress.Commands.add('login', (email, password) => {
       cy.get('#ap_email').should('be.visible').and('have.value', '').type(email, {log: false});
       cy.get('.a-button-input').click();
       cy.get('#ap_password').should('be.visible').and('have.value', '').type(`${password}{enter}`, {log: false});
-    }, {cacheAcrossSpecs: true})
+    }, { cacheAcrossSpecs: true })
   });
 
 Cypress.Commands.add('addToCartAndCloseRecommendation', () =>{
@@ -34,7 +34,7 @@ Cypress.Commands.add('addToCartAndCloseRecommendation', () =>{
     });
 });
 
-Cypress.Commands.add('waitForAutocomplete', () => {
+Cypress.Commands.add('waitForAutoComplete', () => {
     // aguarda a proxima requisição de atualização de UI
     cy.intercept('POST', '**AutocompleteUIServiceMetrics**').as('getCart');
     cy.wait('@getCart');
