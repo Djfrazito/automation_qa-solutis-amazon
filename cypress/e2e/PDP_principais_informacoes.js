@@ -4,7 +4,7 @@ beforeEach(() => {
 
   cy.visit('/');
 
-  searchProduct = 'notebook';
+  searchProduct = 'tv';
 
   //busca um produto
   cy.get('input[placeholder="Pesquisa Amazon.com.br"]')
@@ -109,14 +109,6 @@ describe('Página do produto', () => {
     .should('be.visible')
     .click();
 
-  });
-
-  it.skip('Valida avaliações do produto', () => {
-
-  });
-
-  it.skip('Valida carrossel de produtos relacionados', () => {
-    
   });
 
 })
