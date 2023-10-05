@@ -1,6 +1,10 @@
 const { defineConfig } = require("cypress");
+require('dotenv').config();
 
 module.exports = defineConfig({
+  env: {
+    ...process.env,
+  },
   e2e: {
     baseUrl: "https://www.amazon.com.br",
     viewportHeight:720,
