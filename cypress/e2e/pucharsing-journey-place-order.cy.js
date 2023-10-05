@@ -2,7 +2,7 @@ const email = Cypress.env("AMAZON_EMAIL");
 const password = Cypress.env("AMAZON_PASSWORD");
 const productAsin = require('../fixtures/productAsin.json');
 
-const selectedProduct = productAsin.bonecoHomemAranha;
+const selectedProduct = productAsin.bonecoGroot;
 let quantity = ''
 
 beforeEach(() => {
@@ -15,10 +15,10 @@ afterEach(() => {
 });
 
 describe('Tela de fechamento do pedido', () => {
-    it('Válida o botão de seleção do endereço', () => {
+    it('Valida o botão de seleção do endereço', () => {
         cy.get('[data-testid="Address_selectShipToThisAddress"]').should('be.visible');
     });
-    it('Válida adicionar instruções de entrega', () => {
+    it('Valida adicionar instruções de entrega', () => {
        // Clique em "Adicionar instruções de entrega"
         cy.get('[data-csa-c-type="widget"] > .a-link-normal')
         .contains('Adicionar instruções de entrega')
@@ -52,7 +52,7 @@ describe('Tela de fechamento do pedido', () => {
         .should('have.text', 'Apartamento');
     });
 
-    it('Válida adicionar cartão de crédito como método de pagamento', () => {
+    it('Valida adicionar cartão de crédito como método de pagamento', () => {
         cy.selectAddress();
         // Clica em adicionar um cartão de crédito
         cy.intercept('POST', 'https://apx-security.amazon.com.br/cpe/pm/register').as('postApxSubmit')
@@ -63,7 +63,7 @@ describe('Tela de fechamento do pedido', () => {
         cy.wait('@postApxSubmit')
     });
 
-    it('Válida mensagem de erro ao tentar adicionar cupom incorreto durante a seleção do metodo de pagamento', () => {
+    it('Valida mensagem de erro ao tentar adicionar cupom incorreto durante a seleção do metodo de pagamento', () => {
         cy.selectAddress();
         // Clica no botão de aplicar cupom de desconto
         cy.get('input[name="ppw-claimCodeApplyPressed"]')
