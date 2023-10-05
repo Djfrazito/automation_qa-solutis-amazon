@@ -6,7 +6,7 @@ let address = {
   name: fakerPT_BR.person.fullName(),
   phone: fakerPT_BR.phone.number(),
   number:  fakerPT_BR.location.buildingNumber(),
-  cep: "05750220",
+  cep: "05750220"
 }
 
 beforeEach(() => {
@@ -28,18 +28,20 @@ describe("Tela de meus endereços", () => {
   it('Removendo o endereço do usuário caso já exista.', () => {
     cy.visit('/a/addresses?ref_=ya_d_c_addr');
     // Verificando se o endereço foi adicionado.
-    cy.get('.a-section.a-spacing-double-large')
-      .should("exist")
-      .children()
-      .should('contain', address.number)
-      .and('contain', address.cep) // Rua Francisco Viana
-      .then(() => {
-        // Removendo o endereço.
-        cy.get(`a#ya-myab-address-delete-btn-1`).click();
-        cy.get('#deleteAddressModal-1-submit-btn > span > .a-button-input')
-          .should('be.visible')
-          .click()
-          .type('{enter}');
+    cy.wait(2000);
+    cy.get('.a-section.address-section-no-default > .a-row.a-spacing-small > .a-unordered-list.a-nostyle.a-vertical > li > .a-list-item > #address-ui-widgets-CityStatePostalCode')
+      .should("be.visible")
+      .each(($card, index) => {
+        const cardText = $card.text();
+        cy.log($card.text())
+        if (cardText.includes(address.cep)) {
+          cy.get(`a#ya-myab-address-delete-btn-${index}`).click();
+          cy.get(`#deleteAddressModal-${index}-submit-btn > span > .a-button-input`)
+            .should('be.visible')
+            .click()
+            .type('{enter}');
+          return false;
+        }
     })
   })
 
@@ -55,7 +57,7 @@ describe("Tela de meus endereços", () => {
         address.cep = '08420720'; // Avenida Professor João Batista Conti
         address.number = '456';
         cy.log('Achou cep e número do endereço');
-        cy.get('a#ya-myab-address-edit-btn-0').click();
+        cy.get('a#ya-myab-address-edit-btn-1').click();
 
         // Editando o endereço.
         cy.fillAddressDetails(address);

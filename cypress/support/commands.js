@@ -19,8 +19,10 @@ Cypress.Commands.add('login', (email, password) => {
     cy.get('#ap_email').type(email, {log: false});
     cy.get('.a-button-input').click();
     cy.get('#ap_password').type(`${password}{enter}`, {log: false});
-  }, {cacheAcrossSpecs: true, validate: () => {
-    return cy.getCookie("session-token").should("exist");
+  }, {
+    cacheAcrossSpecs: true, 
+    validate: () => {
+      return cy.getCookie("session-token").should("exist");
   }})
 })
 
