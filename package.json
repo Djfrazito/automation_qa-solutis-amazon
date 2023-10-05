@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "cy:open": "npx cypress open",
-    "cy:run": "npx cypress run --browser electron --headless"
+    "cy:run": "npx cypress run --browser chrome --headless"
   },
   "author": "",
   "license": "ISC",
