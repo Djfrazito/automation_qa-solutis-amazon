@@ -22,44 +22,50 @@ Cypress.Commands.add('login', (email, password) => {
     }, { cacheAcrossSpecs: true })
   });
 
-Cypress.Commands.add('addToCartAndCloseRecommendation', () =>{
-    // fecha a tela de recomendação se ela for exibida
+Cypress.Commands.add('addToCartAndCloseRecommendation', () => {
+    cy.intercept('POST', '/cart/add-to-cart/*').as('addToCart');
     cy.get('#add-to-cart-button').should('be.visible').click();
+    // Verifica se o botão de fechar da recomendação existe no corpo da página
     cy.get('body').then(($body) => {
-        if ($body.find('.a-popover-header > .a-button-close').length > 0) {   // verifica se o botão existe no corpo
-            cy.get('.a-button-close')
-                .should('be.visible')
-                .click();
-        }
+      if ($body.find('.a-popover-header > .a-button-close').length > 0) {
+        // Fecha a recomendação
+        cy.get('.a-button-close').should('be.visible').click();
+      }
     });
-});
-
-Cypress.Commands.add('waitForAutoComplete', () => {
-    // aguarda a proxima requisição de atualização de UI
-    cy.intercept('POST', '**AutocompleteUIServiceMetrics**').as('getCart');
-    cy.wait('@getCart');
+    cy.wait('@addToCart')
 });
 
 Cypress.Commands.add('addProductToCart', (productAsin) => {
-    // Visitar a página do produto
-    cy.visit(`/dp/${productAsin}`);
-  
-    // Adicionar o produto ao carrinho e fechar a recomendação
-    cy.addToCartAndCloseRecommendation();
-  
-    // Ir para o carrinho
-    cy.get('.a-spacing-base > .a-button > .a-button-inner > .a-button-text')
-      .should('be.visible')
-      .click();
-  });
-  
-  Cypress.Commands.add('removeProductFromCart', (productAsin) => {
-    cy.visit('/cart')
+    // Visitar a página de adicionar ao carrinho pelo ASIN
+    cy.visit(`/gp/aws/cart/add.html?ASIN.1=${productAsin}`);
+    cy.get('.a-button-input')
+    .click();
+});
+
+Cypress.Commands.add('addProductToCartAndPlaceOrder', (productAsin) => {
+    // Visitar a página de adicionar ao carrinho pelo ASIN
+    cy.visit(`/gp/aws/cart/add.html?ASIN.1=${productAsin}`);
+    cy.get('.a-button-input')
+    .click();
+    // Clica no botão de fechar pedido
+    cy.get('#sc-buy-box-ptc-button > .a-button-inner > .a-button-input')
+        .should('be.visible')
+        .click();
+});
+
+Cypress.Commands.add('removeProductFromCart', (productAsin) => {
+    // Visitar a página do carrinho
+    cy.visit('/cart');
+
     // Encontrar o produto pelo ASIN e clicar no link 'Excluir'
     cy.get(`[data-asin="${productAsin}"]`)
       .find('.sc-action-delete > .a-declarative > .a-color-link')
       .contains('Excluir')
       .click();
-  });
-  
-  
+});
+
+Cypress.Commands.add('selectAddress', () => {
+    cy.get('[data-testid="Address_selectShipToThisAddress"]')
+    .should('be.visible')
+    .click();
+});

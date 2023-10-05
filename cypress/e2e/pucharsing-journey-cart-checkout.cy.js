@@ -3,14 +3,14 @@ const password = Cypress.env("AMAZON_PASSWORD");
 
 const productAsin = require('../fixtures/productAsin.json')
 let quantity = ''
-
+const selectedProduct = productAsin.bonecoHomemAranha;
 beforeEach(() => {
     cy.login(email, password);
-    cy.addProductToCart(productAsin.echoDot);
+    cy.addProductToCart(selectedProduct);
 });
 
 afterEach(() => {
-    cy.removeProductFromCart(productAsin.echoDot);
+    cy.removeProductFromCart(selectedProduct);
 });
 
 describe('Página do carrinho de compras', () => {
@@ -25,44 +25,46 @@ describe('Página do carrinho de compras', () => {
         cy.visit('/cart');
 
         quantity = '2'
-        cy.get(`[data-asin="${productAsin.echoDot}"]`)
+        cy.get(`[data-asin="${selectedProduct}"]`)
         .find('.a-dropdown-prompt')
         .should('be.visible')
         .click();
-        cy.intercept('GET', '/gp/cart/checkout-*').as('getQuantity');
         cy.get(`#quantity_${quantity}`)
         .should('be.visible')
-        .click();
-        cy.wait('@getQuantity');
-        cy.get(`[data-asin="${productAsin.echoDot}"]`)
-        .find('.a-dropdown-prompt')
-        .contains(`${quantity}`);
+        .click()
+        .then(() => {
+            // Verifique se a quantidade no carrinho foi atualizada
+            cy.get(`[data-asin="${selectedProduct}"]`)
+            .find('.a-dropdown-prompt')
+            .should('have.text', quantity);
+        });
     });
 
     it('Deve fornecer o link de compartilhamento do produto', () => {
-        cy.get(`[data-asin="${productAsin.echoDot}"]`)
+        cy.get(`[data-asin="${selectedProduct}"]`)
         .get('.a-size-small.sc-invisible-when-no-js > .a-declarative > .a-link-normal')
-        .trigger('click');
-        
+        .contains('Compartilhar')
+        .click();
+
         // Valida se o link possui o ASIN do produto selecionado
         cy.get('.link-section')
         .should('be.visible')
-        .contains(`${productAsin.echoDot}`);
+        .should('include.text', `${selectedProduct}`);
     });
 
     it('Deve salvar o produto selecionado para mais tarde', () => {
         cy.visit('/cart');
         cy.intercept('POST', '/cart/ref=ox_sc_cart_actions_*').as('saveCart');
-        cy.get(`[data-asin="${productAsin.echoDot}"]`)
+        cy.get(`[data-asin="${selectedProduct}"]`)
         .contains('Salvar para mais tarde')
         .click();
         cy.wait('@saveCart');
 
         // valida produto na lista de itens salvos e retorna ao carrinho
         cy.intercept('POST', '/cart/ref=ox_sc_mtc_*').as('removeFromFavorites');
-        cy.get('#sc-secondary-list')
+        cy.get('#sc-saved-cart-items')
         .should('be.visible')
-        .find(`[data-asin="${productAsin.echoDot}"]`)
+        .find(`[data-asin="${selectedProduct}"]`)
         .should('be.visible')
         .find('.a-button-input')
         .contains('Mover para o carrinho')
