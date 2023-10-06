@@ -11,5 +11,5 @@ jobs:
         with:
           env: true
         env: 
-          CYPRESS_AMAZON_EMAIL: ${{secrets.AMAZON_EMAIL}}
-          CYPRESS_AMAZON_PASSWORD: ${{secrets.AMAZON_PASSWORD}}
+          AMAZON_EMAIL: ${{secrets.AMAZON_EMAIL}}
+          AMAZON_PASSWORD: ${{secrets.AMAZON_PASSWORD}}
