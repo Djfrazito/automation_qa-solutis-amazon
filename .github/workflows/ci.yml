@@ -8,3 +8,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Cypress Run
         uses: cypress-io/github-action@v5
+        env: 
+          AMAZON_EMAIL: ${{secrets.AMAZON_EMAIL}}
+          AMAZON_PASSWORD: ${{AMAZON_PASSWORD}}
