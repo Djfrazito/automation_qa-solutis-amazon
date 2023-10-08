@@ -2,7 +2,7 @@ const email = Cypress.env("AMAZON_EMAIL");
 const password = Cypress.env("AMAZON_PASSWORD");
 
 beforeEach(() => {
-  cy.login(email, password);
+  cy.login(email, password, 5);
   cy.visit('/');
 });
 

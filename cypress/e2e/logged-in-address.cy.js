@@ -10,7 +10,7 @@ let address = {
 }
 
 beforeEach(() => {
-  cy.login(email, password);
+  cy.login(email, password, 5);
 });
 
 describe("Tela de meus endereços", () => {
