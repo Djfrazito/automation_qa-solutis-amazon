@@ -1,31 +1,10 @@
-/**
- * Login na conta do usuário.
+/*
+ * Faz login na conta do usuário com tentativas de captcha.
  * {String} email
  * {String} password
+ * {Number} tentativas
  */
-// Cypress.Commands.add('login', (email, password) => {
-//   cy.session(email, () => {
-//     cy.visit("/")
-//     // Verificando se o navbar existe.
-//     cy.get('#navbar-main')
-//     .should('exist')
-
-//     // Abrindo o menu da navbar e clicando em login.
-//     cy.get("#nav-link-accountList").trigger('mouseover');
-//     cy.get("#nav-flyout-accountList").should('be.visible');
-//     cy.get('a[data-nav-ref="nav_signin"]').click();
-
-//     // Login com variáveis de ambiente (cypress.env).
-//     cy.get('#ap_email').type(email, {log: false});
-//     cy.get('.a-button-input').click();
-//     cy.get('#ap_password').type(`${password}{enter}`, {log: false});
-//   }, {
-//     validate: () => {
-//       return cy.getCookie("session-token").should("exist");
-//   }})
-// })
-
-Cypress.Commands.add("login", (email, password, tentativas = 5) => {
+Cypress.Commands.add("login", (email, password, tentativas) => {
   const loginAttempt = (tentativasContagem) => {
     // Caso cair no captcha mais de 5 vezes, o teste é pulado.
     if (tentativasContagem <= 0) {
@@ -43,9 +22,13 @@ Cypress.Commands.add("login", (email, password, tentativas = 5) => {
 
         cy.get("#ap_email").type(email, { log: false });
         cy.get(".a-button-input").click();
+        cy.url().then((url) => {
+          if (url.includes("/ap/signin?openid.pape.max_auth_age=")) {
+            loginAttempt(tentativasContagem - 1);
+          }
+        });
         cy.get("#ap_password").type(`${password}{enter}`, { log: false });
 
-        // TODO: Testar a conta do paulo.
         /*
          * Verificando se o usuário caiu no captcha.
          * Caso sim, é feito uma nova tentativa de login.
