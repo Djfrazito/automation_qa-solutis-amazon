@@ -26,32 +26,26 @@ beforeEach(() => {
   .first()
   .click();
 
+  cy.contains('Produtos relacionados a este item').scrollIntoView();
 })
 
-describe('Página do produto', () => {
+describe('Valida carrossel de produtos relacionados', () => {
 
-  it('Valida avaliações do produto: Título indicativo do campo', () => {
-
-    cy.get('#reviewsMedley h2')
-    .should('have.text', 'Avaliações de clientes')
-    .and('be.visible');
-
+  it('Verifica se a lista de produtos do carrossel não está vazia', () => {
+    cy.get('#anonCarousel1 ol')
+    .should('not.be.empty');
   });
 
-  it.skip('Valida avaliações do produto: Número de avaliações', () => {
+  it('Verifica se a os botões de direita e esquerda estão visíveis e clicáveis', () => {
+    cy.get('.a-carousel-right')
+    .first()
+    .should('be.visible')
+    .click();
 
-  });
-
-  it.skip('Valida avaliações do produto: Nota média das avaliações', () => {
-
-
-    
-  });
-
-  it.skip('Valida avaliações do produto: Seção de comentários', () => {
-
-
-    
+    cy.get('.a-carousel-left')
+    .first()
+    .should('be.visible')
+    .click();
   });
 
 })

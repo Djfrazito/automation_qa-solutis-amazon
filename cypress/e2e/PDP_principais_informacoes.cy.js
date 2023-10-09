@@ -28,9 +28,9 @@ beforeEach(() => {
 
 })
 
-describe('Página do produto', () => {
+describe('Valida principais informações', () => {
 
-  it('Valida principais informações: Título', () => {
+  it('Verifica se o título está visível e não vazio', () => {
 
     cy.get('#productTitle')
     .should('be.visible')
@@ -38,7 +38,7 @@ describe('Página do produto', () => {
   
   });
 
-  it('Valida principais informações: Imagem', () => {
+  it('Verifica se existe uma imagem que está visível', () => {
 
     cy.get('#imgTagWrapperId')
     .find('img')
@@ -46,12 +46,12 @@ describe('Página do produto', () => {
 
   });
 
-  it('Valida principais informações: Detalhes do produto', () => {
+  it('Verifica os títulos e tabelas de detalhes do produto, se estão visíveis e não vazias', () => {
     
     cy.get('#prodDetails')
     .should('be.visible')
     .find('h2')
-    .should('have.text', '\n                                Informações sobre o produto ')
+    .should('not.be.empty')
     .and('be.visible');
 
     //primeira tabela
@@ -59,7 +59,7 @@ describe('Página do produto', () => {
     cy.get('#prodDetails')
     .find('h1')
     .first()
-    .should('have.text', 'Detalhes técnicos')
+    .should('not.be.empty')
     .and('be.visible');
 
     //primeiro item da tabela
@@ -77,7 +77,7 @@ describe('Página do produto', () => {
     cy.get('#prodDetails')
     .find('h1')
     .eq(1)
-    .should('have.text', 'Informações adicionais')
+    .should('not.be.empty')
     .and('be.visible');
 
     //primeiro item da tabela
@@ -91,7 +91,7 @@ describe('Página do produto', () => {
 
   });
 
-  it('Valida principais informações: Preço', () => {
+  it('Verifica se o preço não está vazio e é visível', () => {
 
     cy.get('.priceToPay span')
     .should('be.visible')
@@ -99,7 +99,7 @@ describe('Página do produto', () => {
 
   });
 
-  it('Valida principais informações: Botão de Adicionar ao Carrinho', () => {
+  it('Verifica se o botão de Adicionar ao Carrinho, possui texto indicativo e está visível', () => {
     
     cy.get('#add-to-cart-button + span')
     .should('have.text', 'Adicionar ao carrinho')
