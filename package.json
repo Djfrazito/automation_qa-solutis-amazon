@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "cy:open": "npx cypress open",
-    "cy:run": "npx cypress run"
+    "cy:run": "npx cypress run --browser chrome --headless"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^12.11.0"
+    "@faker-js/faker": "^8.1.0",
+    "cypress": "^12.11.0",
+    "dotenv": "^16.3.1"
   }
 }
