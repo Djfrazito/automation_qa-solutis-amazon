@@ -42,17 +42,16 @@ describe('Página de produto adicionar ao carrinho', () => {
         cy.addToCartAndCloseRecommendation();
         
         cy.intercept('POST', '/cart/ewc/update?ref_=ewc_delete_*').as('deleteFromCart');
-        cy.intercept('GET', '/hz/rhf?currentPageType=ShoppingCartAdd*').as ('getUIAtt');
-        
+        cy.wait(1000);
+
+        // Clicla no botão de excluir do carrinho
         cy.get('[data-action="ewc-delete-item"]')
-        .should('be.visible')
-        .find('.a-button-inner input[title="Excluir"]')
+        .should('be.visible')  
         .trigger('mouseover')
         .click();
-
         cy.wait('@deleteFromCart');
-        cy.wait('@getUIAtt')
 
+        // Verifica se o número de itens no cart corresponde à zero
         cy.get('#nav-cart-count')
         .should('be.visible')
         .should('have.text', '0');

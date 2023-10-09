@@ -27,9 +27,11 @@ Cypress.Commands.add('addToCartAndCloseRecommendation', () => {
     cy.get('#add-to-cart-button').should('be.visible').click();
     // Verifica se o botão de fechar da recomendação existe no corpo da página
     cy.get('body').then(($body) => {
-      if ($body.find('.a-popover-header > .a-button-close').length > 0) {
+      if ($body.find('.a-popover-header').length > 0) {
         // Fecha a recomendação
-        cy.get('.a-button-close').should('be.visible').click();
+        cy.get('.a-button-close')
+        .should('be.visible')
+        .click();
       }
     });
     cy.wait('@addToCart')

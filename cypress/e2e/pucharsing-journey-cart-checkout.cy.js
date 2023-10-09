@@ -3,7 +3,9 @@ const password = Cypress.env("AMAZON_PASSWORD");
 
 const productAsin = require('../fixtures/productAsin.json')
 let quantity = ''
+
 const selectedProduct = productAsin.bonecoHomemAranha;
+
 beforeEach(() => {
     cy.login(email, password);
     cy.addProductToCart(selectedProduct);
