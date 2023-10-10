@@ -1,26 +1,26 @@
-let seachProduct = '';
+// let seachProduct = '';
 
-beforeEach(() => {
-  cy.visit('/');
-})
+// beforeEach(() => {
+//   cy.visit('/');
+// })
 
-describe('busca de produtos', () => {
+// describe('busca de produtos', () => {
 
-  it('Valida exibição do menu suspenso de sugestões de pesquisa', () => {
-    cy.get('input[placeholder="Pesquisa Amazon.com.br"]').should('be.visible').click();
-    cy.get('.autocomplete-results-container').should('be.visible');
-  })
+//   it.only('Valida exibição do menu suspenso de sugestões de pesquisa', () => {
+//     cy.get('input[placeholder="Pesquisa Amazon.com.br"]').should('be.visible').click();
+//     cy.get('.autocomplete-results-container').should('be.visible');
+//   })
 
-  it('Busca produto na homepage', () => {
-    seachProduct = 'Alexa';
-    cy.intercept('GET', 'https://aax-us-east-retail-direct.amazon.com/e/xsp/getAd?placementId*').as('getData')
-    cy.wait('@getData')
-    cy.get('input[placeholder="Pesquisa Amazon.com.br"]').should('be.visible').type(seachProduct);
-    cy.get('#nav-search-submit-button').click();
-    cy.get('span').contains(seachProduct).should('be.visible');
-  })
-})
+//   it('Busca produto na homepage', () => {
+//     seachProduct = 'Alexa';
+//     cy.intercept('GET', 'https://aax-us-east-retail-direct.amazon.com/e/xsp/getAd?placementId*').as('getData')
+//     cy.wait('@getData')
+//     cy.get('input[placeholder="Pesquisa Amazon.com.br"]').should('be.visible').type(seachProduct);
+//     cy.get('#nav-search-submit-button').click();
+//     cy.get('span').contains(seachProduct).should('be.visible');
+//   })
+// })
 
-afterEach(() => {
-  cy.screenshot();
-})
+// afterEach(() => {
+//   cy.screenshot();
+// })
