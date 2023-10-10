@@ -13,3 +13,12 @@ jobs:
         env: 
           AMAZON_EMAIL: ${{secrets.AMAZON_EMAIL}}
           AMAZON_PASSWORD: ${{secrets.AMAZON_PASSWORD}}
+      - name: Merge results
+        run: npm run report:merge
+      - name: Generate results
+        run: npm run report:generate
+      - name: Deploy reports page
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
