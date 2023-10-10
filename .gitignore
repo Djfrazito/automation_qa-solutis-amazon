@@ -4,4 +4,3 @@
 .env
 /cypress/results
 /public
-package-lock.json
