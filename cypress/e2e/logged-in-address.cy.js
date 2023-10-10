@@ -10,7 +10,8 @@ let address = {
 };
 
 beforeEach(() => {
-  cy.login(email, password, 5);
+  cy.login(email, password, 3);
+  cy.visit("/");
 });
 
 describe("Tela de meus endereços", () => {
@@ -29,10 +30,11 @@ describe("Tela de meus endereços", () => {
   it("Alterando o endereço do usuário.", () => {
     cy.visit("/a/addresses?ref_=ya_d_c_addr");
     // Verificando se o endereço foi adicionado.
-    cy.get(".a-column.a-span4.a-spacing-none.a-spacing-top-mini.address-column")
+    cy.get(".a-section.address-section-no-default")
       .should("exist")
       .children()
       .and("contain", address.cep)
+      .and("contain", address.number)
       .then(() => {
         address.cep = "08420720"; // Avenida Professor João Batista Conti
         address.number = "456";
