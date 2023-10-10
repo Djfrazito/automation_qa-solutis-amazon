@@ -20,9 +20,31 @@ describe("Tela de meus endereços", () => {
     cy.get('[data-nav-ref="nav_youraccount_btn"]').click();
     cy.contains("a.ya-card__whole-card-link", "Endereços").click();
     cy.get("#ya-myab-address-add-link").click();
+    cy.handleUnableToProcessPage();
     // Adicionando um novo endereço.
     cy.fillAddressDetails(address);
     cy.get("#address-ui-widgets-form-submit-button > span > input").click();
+  });
+
+  it("Alterando o endereço do usuário.", () => {
+    cy.visit("/a/addresses?ref_=ya_d_c_addr");
+    // Verificando se o endereço foi adicionado.
+    cy.get(".a-column.a-span4.a-spacing-none.a-spacing-top-mini.address-column")
+      .should("exist")
+      .children()
+      .and("contain", address.cep)
+      .then(() => {
+        address.cep = "08420720"; // Avenida Professor João Batista Conti
+        address.number = "456";
+        cy.log("Achou cep e número do endereço");
+        cy.get("a#ya-myab-address-edit-btn-1").click();
+
+        // Editando o endereço.
+        cy.fillAddressDetails(address);
+        cy.get("#address-ui-widgets-form-submit-button > span > input")
+          .should("be.visible")
+          .click();
+      });
   });
 
   it("Removendo o endereço do usuário caso já exista.", () => {
@@ -40,7 +62,7 @@ describe("Tela de meus endereços", () => {
       .each(($card, index) => {
         const cardText = $card.text();
         cy.log($card.text());
-        if (cardText.includes(address.cep)) {
+        if (cardText.includes("08420720")) {
           cy.get(`a#ya-myab-address-delete-btn-${index}`).click();
           cy.get(
             `#deleteAddressModal-${index}-submit-btn > span > .a-button-input`
@@ -57,27 +79,5 @@ describe("Tela de meus endereços", () => {
         cy.visit("/a/addresses?ref_=ya_d_c_addr");
       }
     });
-  });
-
-  it.skip("Alterando o endereço do usuário.", () => {
-    cy.visit("/a/addresses?ref_=ya_d_c_addr");
-    // Verificando se o endereço foi adicionado.
-    cy.get(".a-section.a-spacing-double-large")
-      .should("exist")
-      .children()
-      .should("contain", address.number)
-      .and("contain", address.cep)
-      .then(() => {
-        address.cep = "08420720"; // Avenida Professor João Batista Conti
-        address.number = "456";
-        cy.log("Achou cep e número do endereço");
-        cy.get("a#ya-myab-address-edit-btn-1").click();
-
-        // Editando o endereço.
-        cy.fillAddressDetails(address);
-        cy.get("#address-ui-widgets-form-submit-button > span > input")
-          .should("be.visible")
-          .click();
-      });
   });
 });

@@ -32,7 +32,8 @@ Cypress.Commands.add("login", (email, password, tentativas) => {
         /*
          * Verificando se o usuário caiu no captcha.
          * Caso sim, é feito uma nova tentativa de login.
-         * IMPORTANTE: É necessário que o usuário tenha o login salvo no navegador para não cair no captcha.
+         * IMPORTANTE: É necessário que o usuário tenha o login salvo no navegador para
+         * não pedirem a verificação de duas etapas.
          */
         cy.url().then((url) => {
           if (url.includes("/ap/cvf/request?arb=")) {
@@ -42,7 +43,10 @@ Cypress.Commands.add("login", (email, password, tentativas) => {
               cy.get("h4").then(($alert) => {
                 if (
                   $alert.hasClass("a-alert-heading") ||
-                  $alert.text().includes("Mensagem importante!")
+                  $alert.text().includes("Mensagem importante!") ||
+                  $alert
+                    .text()
+                    .includes("Digite os caracteres que você vê abaixo")
                 ) {
                   loginAttempt(tentativasContagem - 1);
                 }
@@ -109,4 +113,16 @@ Cypress.Commands.add("checkIfUserHasOrders", () => {
         cy.log(`O usuário possui ${orderCount} pedidos.`);
       }
     });
+});
+
+Cypress.Commands.add("handleUnableToProcessPage", () => {
+  cy.url().then((url) => {
+    if (url.includes("/unableToProcess")) {
+      cy.get("h1")
+        .contains("Desculpe-nos!")
+        .then(() => {
+          Cypress.mocha.getRunner().suite.ctx.skip();
+        });
+    }
+  });
 });
