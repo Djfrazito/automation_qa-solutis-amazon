@@ -9,8 +9,8 @@ jobs:
       - name: Cypress Run
         uses: cypress-io/github-action@v6
         with:
-          env: true
           browser: chrome
+          env: true
         env: 
           AMAZON_EMAIL: ${{secrets.AMAZON_EMAIL}}
           AMAZON_PASSWORD: ${{secrets.AMAZON_PASSWORD}}

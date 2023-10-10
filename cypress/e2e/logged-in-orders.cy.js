@@ -4,7 +4,7 @@ const password = Cypress.env("AMAZON_PASSWORD");
 let search;
 
 beforeEach(() => {
-  cy.login(email, password);
+  cy.login(email, password, 5);
 });
 
 describe("Tela de meus pedidos", () => {
