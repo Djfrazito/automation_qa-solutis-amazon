@@ -6,11 +6,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Cypress run
+      - name: Cypress Run
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
           env: true
-        env:
+        env: 
           AMAZON_EMAIL: ${{secrets.AMAZON_EMAIL}}
           AMAZON_PASSWORD: ${{secrets.AMAZON_PASSWORD}}
+      - name: Merge results
+        run: npm run report:merge
+      - name: Generate results
+        run: npm run report:generate
+      - name: Deploy reports page
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

@@ -1,0 +1,333 @@
+{
+  "stats": {
+    "suites": 3,
+    "tests": 8,
+    "passes": 0,
+    "pending": 0,
+    "failures": 3,
+    "testsRegistered": 8,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 5,
+    "hasSkipped": true,
+    "start": "2023-10-06T22:05:59.538Z",
+    "end": "2023-10-06T22:08:08.279Z",
+    "duration": 128741
+  },
+  "results": [
+    {
+      "uuid": "94b79b7c-ad9d-4d2c-bdc0-2857eea27d18",
+      "title": "",
+      "fullFile": "cypress\\e2e\\logged-in-homepage.cy.js",
+      "file": "cypress\\e2e\\logged-in-homepage.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5287f86c-2ff7-4ce6-97f2-b1d901b9927a",
+          "title": "Tela homepage da area logada",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Validando botões da homepage.",
+              "fullTitle": "Tela homepage da area logada Validando botões da homepage.",
+              "timedOut": null,
+              "duration": 25540,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "\"videos/logged-in-homepage.cy.js.mp4\"",
+              "code": "cy.get('[data-nav-ref=\"nav_youraccount_btn\"]').click();\n// Clicando em cada botão da homepage de login.\ncy.get('a.ya-card__whole-card-link').should('exist').each((_, index) => {\n  cy.get('a.ya-card__whole-card-link').eq(index).click({\n    force: true\n  }).should('have.attr', \"href\");\n  cy.go('back');\n});",
+              "err": {
+                "message": "TypeError: The following error originated from your application code, not from Cypress.\n\n  > Cannot read properties of null (reading 'clientSideContext')\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application\n\nThis error occurred while creating the session. Because the session setup failed, we failed the test.\n\nBecause this error occurred during a `before each` hook we are skipping all of the remaining tests.",
+                "estack": "TypeError: The following error originated from your application code, not from Cypress.\n\n  > Cannot read properties of null (reading 'clientSideContext')\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application\n\nThis error occurred while creating the session. Because the session setup failed, we failed the test.\n\nBecause this error occurred during a `before each` hook we are skipping all of the remaining tests.\n    at ACIC.addResult (https://images-na.ssl-images-amazon.com/images/I/71GB9mszwiL.js?AUIClients/ACICAssets:538:9782)\n    at ACIC.processArnoldHttpResponse (https://images-na.ssl-images-amazon.com/images/I/71GB9mszwiL.js?AUIClients/ACICAssets:538:16639)\n    at xhr.onload (https://images-na.ssl-images-amazon.com/images/I/71GB9mszwiL.js?AUIClients/ACICAssets:538:16044)",
+                "diff": null
+              },
+              "uuid": "59dcd3a6-5985-4431-8819-4ced784776a7",
+              "parentUUID": "5287f86c-2ff7-4ce6-97f2-b1d901b9927a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Validando os links de cada card da homepage.",
+              "fullTitle": "Tela homepage da area logada Validando os links de cada card da homepage.",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('[data-nav-ref=\"nav_youraccount_btn\"]').click();\n// Validando se os cards existem\ncy.get('.ya-card-cell').should('exist');\n// Validando se os cards possuem 25 links\ncy.get('.ya-card-cell .a-list-item a').should('have.length', 25);\n// Array com o titulo dos cards\nconst expectedCardsTitle = [\"Conteúdo digital e dispositivos\", \"Alertas de e-mail, mensagens e anúncios\", \"Mais formas de pagamento\", \"Configurações de compras e pedidos\", \"Outras contas\", \"Assinaturas\", \"Dados e privacidade\"];\n// Validando se o titulo dos cards são iguais ao array\ncy.get('.a-box > .a-box-inner > .ya-card__heading--poor').each((_, index) => {\n  cy.get('.a-box > .a-box-inner > .ya-card__heading--poor').contains(expectedCardsTitle[index]);\n});",
+              "err": {},
+              "uuid": "e55767af-e8e8-43ef-bf23-34402fa89ba3",
+              "parentUUID": "5287f86c-2ff7-4ce6-97f2-b1d901b9927a",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "59dcd3a6-5985-4431-8819-4ced784776a7"
+          ],
+          "pending": [],
+          "skipped": [
+            "e55767af-e8e8-43ef-bf23-34402fa89ba3"
+          ],
+          "duration": 25540,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "f1df413f-08d5-4a6d-875f-81b078644e2e",
+      "title": "",
+      "fullFile": "cypress\\e2e\\logged-in-orders.cy.js",
+      "file": "cypress\\e2e\\logged-in-orders.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e1afed8c-6571-4f8a-802d-d05928437797",
+          "title": "Tela de meus pedidos",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Validando pesquisa de pedidos.",
+              "fullTitle": "Tela de meus pedidos Validando pesquisa de pedidos.",
+              "timedOut": null,
+              "duration": 11912,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "\"videos/logged-in-orders.cy.js.mp4\"",
+              "code": "search = \"Pote\";\ncy.visit(\"/gp/your-account/order-history\");\ncy.checkIfUserHasOrders();\n// Pesquisando por um produto.\ncy.get(\"input[name='search']\").type(`${search}{enter}`);\ncy.get('span').contains(search).should('be.visible');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 6000ms: Expected to find element: `#navbar-main`, but never found it.\n\nThis error occurred while creating the session. Because the session setup failed, we failed the test.\n\nBecause this error occurred during a `before each` hook we are skipping all of the remaining tests.",
+                "estack": "AssertionError: Timed out retrying after 6000ms: Expected to find element: `#navbar-main`, but never found it.\n\nThis error occurred while creating the session. Because the session setup failed, we failed the test.\n\nBecause this error occurred during a `before each` hook we are skipping all of the remaining tests.\n    at Object.eval [as setup] (webpack:///./cypress/support/commands.js:11:5)",
+                "diff": null
+              },
+              "uuid": "236fd979-f315-4336-949d-b4ef3c886ce9",
+              "parentUUID": "e1afed8c-6571-4f8a-802d-d05928437797",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Validando botão de comprar novamente.",
+              "fullTitle": "Tela de meus pedidos Validando botão de comprar novamente.",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"/gp/your-account/order-history\");\ncy.checkIfUserHasOrders();\ncy.get(\"a[aria-label='Comprar novamente']\").first().click();\n// Adicionando e removendo o primeiro item dos pedidos.\ncy.get(\"input[name='submit.addToCart']\").first().click();\ncy.get(\"#atc-stepper-remove-button\").first().click();",
+              "err": {},
+              "uuid": "abb1eddb-84ec-47c8-8e33-d31551b1f391",
+              "parentUUID": "e1afed8c-6571-4f8a-802d-d05928437797",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Validando a avaliação do produto.",
+              "fullTitle": "Tela de meus pedidos Validando a avaliação do produto.",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"/gp/your-account/order-history\");\ncy.checkIfUserHasOrders();\ncy.get(\"a:contains('Avaliar o produto')\").first().click();\n// Avaliando o produto com 5 estrelas.\ncy.get(\"div[class='a-section a-spacing-top-micro'] > button[data-hook='ryp-star']:nth-child(5)\").should(\"be.visible\").click();\n// Avaliando características do produto.\nfor (let i = 1; i < 4; i++) {\n  cy.get(`button[data-hook='ryp-star']:nth-child(${i})`).eq(i).should(\"be.visible\").click();\n}\n// Escrevendo o título da avaliação. \ncy.get(\"input[data-hook=ryp-review-title-input]\").type(\"Produto muito bom\");\n// Adicionando uma imagem e escrevendo avaliação escrita.\ncy.get(\"input[type=file]\").selectFile(\"cypress/images/imagem.png\", {\n  force: true\n});\ncy.get(\"#scarface-review-text-card-title\").type(\"Eu recomendo este produto.\");",
+              "err": {},
+              "uuid": "22d842d4-9ef5-4308-b125-c88179aea1f4",
+              "parentUUID": "e1afed8c-6571-4f8a-802d-d05928437797",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "236fd979-f315-4336-949d-b4ef3c886ce9"
+          ],
+          "pending": [],
+          "skipped": [
+            "abb1eddb-84ec-47c8-8e33-d31551b1f391",
+            "22d842d4-9ef5-4308-b125-c88179aea1f4"
+          ],
+          "duration": 11912,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "3db7fc5b-97df-403f-8dfa-a36123a8c667",
+      "title": "",
+      "fullFile": "cypress\\e2e\\logged-in-address.cy.js",
+      "file": "cypress\\e2e\\logged-in-address.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c1d4e0b4-4c6c-43fb-8b5b-ec82e11e979e",
+          "title": "Tela de meus endereços",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Adicionando endereço na conta do usuário.",
+              "fullTitle": "Tela de meus endereços Adicionando endereço na conta do usuário.",
+              "timedOut": null,
+              "duration": 25744,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "\"videos/logged-in-address.cy.js.mp4\"",
+              "code": "cy.visit(\"/\");\n// Acessando a página de endereços.\ncy.get('[data-nav-ref=\"nav_youraccount_btn\"]').click();\ncy.contains(\"a.ya-card__whole-card-link\", \"Endereços\").click();\ncy.get(\"#ya-myab-address-add-link\").click();\n// Adicionando um novo endereço.\ncy.fillAddressDetails(address);\ncy.get(\"#address-ui-widgets-form-submit-button > span > input\").click();",
+              "err": {
+                "message": "TypeError: The following error originated from your application code, not from Cypress.\n\n  > Cannot read properties of null (reading 'clientSideContext')\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application\n\nThis error occurred while creating the session. Because the session setup failed, we failed the test.\n\nBecause this error occurred during a `before each` hook we are skipping all of the remaining tests.",
+                "estack": "TypeError: The following error originated from your application code, not from Cypress.\n\n  > Cannot read properties of null (reading 'clientSideContext')\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application\n\nThis error occurred while creating the session. Because the session setup failed, we failed the test.\n\nBecause this error occurred during a `before each` hook we are skipping all of the remaining tests.\n    at ACIC.addResult (https://images-na.ssl-images-amazon.com/images/I/71GB9mszwiL.js?AUIClients/ACICAssets:538:9782)\n    at ACIC.processArnoldHttpResponse (https://images-na.ssl-images-amazon.com/images/I/71GB9mszwiL.js?AUIClients/ACICAssets:538:16639)\n    at xhr.onload (https://images-na.ssl-images-amazon.com/images/I/71GB9mszwiL.js?AUIClients/ACICAssets:538:16044)",
+                "diff": null
+              },
+              "uuid": "cb4953ef-84c3-4b1c-9fdf-023b9f8d83d3",
+              "parentUUID": "c1d4e0b4-4c6c-43fb-8b5b-ec82e11e979e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Removendo o endereço do usuário caso já exista.",
+              "fullTitle": "Tela de meus endereços Removendo o endereço do usuário caso já exista.",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/a/addresses?ref_=ya_d_c_addr');\n// Verificando se o endereço foi adicionado.\ncy.wait(2000);\ncy.get('.a-section.address-section-no-default > .a-row.a-spacing-small > .a-unordered-list.a-nostyle.a-vertical > li > .a-list-item > #address-ui-widgets-CityStatePostalCode').should(\"be.visible\").each(($card, index) => {\n  const cardText = $card.text();\n  cy.log($card.text());\n  if (cardText.includes(address.cep)) {\n    cy.get(`a#ya-myab-address-delete-btn-${index}`).click();\n    cy.get(`#deleteAddressModal-${index}-submit-btn > span > .a-button-input`).should('be.visible').click().type('{enter}');\n    return false;\n  }\n});",
+              "err": {},
+              "uuid": "93bcadb5-35a9-45a1-9414-99824c70d6fd",
+              "parentUUID": "c1d4e0b4-4c6c-43fb-8b5b-ec82e11e979e",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Alterando o endereço do usuário.",
+              "fullTitle": "Tela de meus endereços Alterando o endereço do usuário.",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/a/addresses?ref_=ya_d_c_addr');\n// Verificando se o endereço foi adicionado.\ncy.get('.a-section.a-spacing-double-large').should(\"exist\").children().should('contain', address.number).and('contain', address.cep).then(() => {\n  address.cep = '08420720'; // Avenida Professor João Batista Conti\n  address.number = '456';\n  cy.log('Achou cep e número do endereço');\n  cy.get('a#ya-myab-address-edit-btn-1').click();\n  // Editando o endereço.\n  cy.fillAddressDetails(address);\n  cy.get('#address-ui-widgets-form-submit-button > span > input').should('be.visible').click();\n});",
+              "err": {},
+              "uuid": "63d61019-33b3-4556-84b4-f90fbbbbcefd",
+              "parentUUID": "c1d4e0b4-4c6c-43fb-8b5b-ec82e11e979e",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "cb4953ef-84c3-4b1c-9fdf-023b9f8d83d3"
+          ],
+          "pending": [],
+          "skipped": [
+            "93bcadb5-35a9-45a1-9414-99824c70d6fd",
+            "63d61019-33b3-4556-84b4-f90fbbbbcefd"
+          ],
+          "duration": 25744,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": true,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/results/json",
+        "quiet": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

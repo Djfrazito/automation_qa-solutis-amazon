@@ -2,3 +2,5 @@
 /cypress/screenshots
 /cypress/videos
 .env
+/cypress/results
+/public
